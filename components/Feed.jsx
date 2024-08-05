@@ -1,5 +1,6 @@
 'use client'
 
+import {featuredPosts} from '@utils/featurePosts';
 import { useEffect, useState } from 'react'
 
 import PromptCard from './PromptCard'
@@ -47,6 +48,11 @@ const Feed = () => {
     setFilteredPosts(filtered);
   }
 
+  const handleClearSearch = () => {
+    setSearchText('');
+    setFilteredPosts(posts);
+  }
+
   //Fetch all posts from database
   useEffect(() => {
     const fetchPosts = async () => {
@@ -71,15 +77,31 @@ const Feed = () => {
           required
           className='search_input peer'
         />
+        { searchText?.length > 0 &&
+          <span
+            className='text-gray-500 absolute right-5 cursor-pointer'
+            onClick={handleClearSearch}
+          >
+            Clear
+          </span>
+        }
       </form>
 
-      {filteredPosts.length === 0 ? (
-        <p className='text-center text-gray-500 mt-4'>No posts found.</p>
+      {searchText.length === 0 ? (
+        <div className='mt-6 prompt_layout'>
+          {featuredPosts.map(post => {
+            return (
+              <PromptCard post={post} />
+            )
+          })}
+        </div>
       ) : (
-        <PromptCardList
-          data={filteredPosts}
-          handleTagClick={handleTagClick}
-        />
+        filteredPosts?.length === 0 ?
+          <p className='text-center text-gray-500 mt-4'>No posts found.</p> :
+          <PromptCardList
+            data={filteredPosts}
+            handleTagClick={handleTagClick}
+          />
       )}
     </section>
   )

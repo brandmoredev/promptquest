@@ -16,13 +16,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   
   // Check if the text is longer than 100 characters
   const prompt = post.prompt
-  const isLongText = prompt.length > 100;
+  const isLongText = prompt.length > 400;
   
   // Truncate text if not expanded
   const truncatedText = isLongText ? `${prompt.slice(0, 500)}...` : prompt;
 
   const handleProfileClick = (post) => {
     if (status === "loading") return
+    if(post.creator._id === 0) return
     if (post.creator._id === session?.user?.id) {
       router.push('/profile')
     } else {
@@ -76,7 +77,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         {isLongText && (
           <button
             className='text-blue-500 hover:underline text-sm'
-            onClick={() => setIsExpanded(!isExpanded)}
+            onClick={() => setIsExpanded(prev => !prev)}
           >
             {isExpanded ? 'See Less' : 'See More'}
           </button>

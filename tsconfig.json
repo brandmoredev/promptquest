@@ -21,6 +21,14 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",  // Base directory for resolving non-relative paths
+    "paths": {
+      "@components/*": ["components/*"],  // Maps '@components' to 'components'
+      "@models/*": ["models/*"],  // Maps '@models' to 'models'
+      "@styles/*": ["styles/*"],          // Maps '@styles' to 'styles'
+      "@utils/*": ["utils/*"],            // Maps '@utils' to 'utils'
+      "@/*": ["*"]                        // Maps '@' to the root of the project
+    },
   },
   "include": [
     "next-env.d.ts",
