@@ -31,7 +31,7 @@ const CreatePost = () => {
         })
       })
 
-      if(response.ok) router.push('/')
+      if(response.ok) router.push('/profile')
     } catch (error) {
       console.log(error)
     } finally {
