@@ -89,9 +89,9 @@ const Feed = () => {
 
       {searchText.length === 0 ? (
         <div className='mt-6 prompt_layout'>
-          {featuredPosts.map(post => {
+          {featuredPosts.map((post, index) => {
             return (
-              <PromptCard post={post} />
+              <PromptCard post={post} key={index} handleTagClick={handleTagClick}/>
             )
           })}
         </div>
