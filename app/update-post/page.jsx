@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Form from '@components/Form';
 
 
-const UpdatePost = () => {
+const EditPost = () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   if (!session) router.push('/');
@@ -82,5 +82,15 @@ const UpdatePost = () => {
     />
   )
 }
+
+
+const UpdatePost = () => {
+  return(
+    <Suspense fallback={<p>Loading...</p>}>
+      <EditPost />
+    </Suspense>
+  )
+}
+
 
 export default UpdatePost;

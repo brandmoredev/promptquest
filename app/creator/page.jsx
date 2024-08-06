@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 
 import Profile from "@components/Profile";
 
-const CreatorProfile = () => {
+const UserProfile = () => {
   const { data: session, status } = useSession();
   const [creator, setCreator] = useState(null);
   const [posts, setPosts] = useState([]);
@@ -52,5 +52,16 @@ const CreatorProfile = () => {
     />
   )
 }
+
+
+const CreatorProfile = () => {
+  return(
+    <Suspense fallback={<p>Loading...</p>}>
+      <UserProfile />
+    </Suspense>
+  )
+}
+
+
 
 export default CreatorProfile
