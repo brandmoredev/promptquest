@@ -6,7 +6,10 @@ export const GET = async (req, { params }) => {
     await connectToDB()
     const posts = await Post.find({
       creator: params.id
-    }).populate('creator')
+    }).populate({
+      path: 'creator',
+      select: '-email'
+    })
 
     return new Response(JSON.stringify(posts), { status: 200})
 
