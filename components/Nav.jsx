@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 
 const Nav = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
@@ -34,7 +34,7 @@ const Nav = () => {
 
       {/* Desktop Navigation */}
       <div className='sm:flex hidden'>
-        {session?.user ? (
+        { status === 'loading' && session?.user ? (
           <div className='flex gap-3 md:gap-5 sm:gap-2'>
             <Link href='/create-post' className='black_btn'>
               Create Post
@@ -73,7 +73,7 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className='sm:hidden flex relative'>
-        {session?.user ? (
+        {status === 'loading' && session?.user ? (
           <div className='flex'>
             <Image
               src={session?.user?.image || 'assets/images/logo.svg'}
