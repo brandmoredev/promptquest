@@ -1,5 +1,5 @@
 # PromptQuest
-## Build with NextJS, NextAuth and MongoDB
+## Built with NextJS, NextAuth and MongoDB
 
 
 ### Features
